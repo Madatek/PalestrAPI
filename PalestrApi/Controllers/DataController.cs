@@ -9,17 +9,28 @@ namespace PalestrApi.Controllers
 {
     public class DataController : ApiController
     {
-        public void test1() {
+        public List<object> Get() {
             using (EntityModel db = new EntityModel())
             {
-                var prenotazioni = (
+                var prenotazioni =
                     from p in db.Prenotazione
                     join c in db.Clienti
                     on p.IdCliente equals c.Id
                     join pa in db.Palestre
                     on p.IdPalestra equals pa.Id
-                    select p
-                   ).ToList();
+                    select new
+                    {
+                        Palestra = pa.Nome,
+                        Cliente = c.Cognome,
+                        Da = p.OraInizio,
+                        A = p.OraFine,
+                        Attrezzato = p.Attrezzato
+                    };
+
+                prenotazioni.ToList();
+                return (List<object>)prenotazioni;
+
+                
             }
 
         }
