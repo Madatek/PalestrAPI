@@ -9,7 +9,9 @@ namespace PalestrApi.Controllers
 {
     public class DataController : ApiController
     {
+        [Route("api/data/getPrenotazioni")]
         public List<object> Get() {
+            List<object> pre = new List<object>();
             using (EntityModel db = new EntityModel())
             {
                 var prenotazioni =
@@ -27,12 +29,12 @@ namespace PalestrApi.Controllers
                         Attrezzato = p.Attrezzato
                     };
 
-                prenotazioni.ToList();
-                return (List<object>)prenotazioni;
-
-                
+                foreach (object p in prenotazioni)
+                {
+                    pre.Add(p);
+                }
             }
-
+            return pre;
         }
     }
 }
