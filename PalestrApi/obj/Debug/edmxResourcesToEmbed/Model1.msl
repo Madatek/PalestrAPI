@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PalestrAPIModelStoreContainer" CdmEntityContainer="EntityModel">
+    <EntitySetMapping Name="Clienti">
+      <EntityTypeMapping TypeName="PalestrAPIModel.Clienti">
+        <MappingFragment StoreEntitySet="Clienti">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Cognome" ColumnName="Cognome" />
+          <ScalarProperty Name="DataNascita" ColumnName="DataNascita" />
+          <ScalarProperty Name="Abbonato" ColumnName="Abbonato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Palestre">
+      <EntityTypeMapping TypeName="PalestrAPIModel.Palestre">
+        <MappingFragment StoreEntitySet="Palestre">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prenotazione">
+      <EntityTypeMapping TypeName="PalestrAPIModel.Prenotazione">
+        <MappingFragment StoreEntitySet="Prenotazione">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdPalestra" ColumnName="IdPalestra" />
+          <ScalarProperty Name="OraInizio" ColumnName="OraInizio" />
+          <ScalarProperty Name="OraFine" ColumnName="OraFine" />
+          <ScalarProperty Name="Attrezzato" ColumnName="Attrezzato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

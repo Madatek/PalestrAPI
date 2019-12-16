@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PalestrAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clienti">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cognome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DataNascita" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Abbonato" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Prenotazione" Relationship="Self.FK__Prenotazi__IdCli__2B3F6F97" FromRole="Clienti" ToRole="Prenotazione" />
+  </EntityType>
+  <EntityType Name="Palestre">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Prenotazione" Relationship="Self.FK__Prenotazi__IdPal__2C3393D0" FromRole="Palestre" ToRole="Prenotazione" />
+  </EntityType>
+  <EntityType Name="Prenotazione">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" Nullable="false" />
+    <Property Name="IdPalestra" Type="Int32" Nullable="false" />
+    <Property Name="OraInizio" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="OraFine" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Attrezzato" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Clienti" Relationship="Self.FK__Prenotazi__IdCli__2B3F6F97" FromRole="Prenotazione" ToRole="Clienti" />
+    <NavigationProperty Name="Palestre" Relationship="Self.FK__Prenotazi__IdPal__2C3393D0" FromRole="Prenotazione" ToRole="Palestre" />
+  </EntityType>
+  <Association Name="FK__Prenotazi__IdCli__2B3F6F97">
+    <End Role="Clienti" Type="Self.Clienti" Multiplicity="1" />
+    <End Role="Prenotazione" Type="Self.Prenotazione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clienti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prenotazione">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prenotazi__IdPal__2C3393D0">
+    <End Role="Palestre" Type="Self.Palestre" Multiplicity="1" />
+    <End Role="Prenotazione" Type="Self.Prenotazione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Palestre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prenotazione">
+        <PropertyRef Name="IdPalestra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EntityModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clienti" EntityType="Self.Clienti" />
+    <EntitySet Name="Palestre" EntityType="Self.Palestre" />
+    <EntitySet Name="Prenotazione" EntityType="Self.Prenotazione" />
+    <AssociationSet Name="FK__Prenotazi__IdCli__2B3F6F97" Association="Self.FK__Prenotazi__IdCli__2B3F6F97">
+      <End Role="Clienti" EntitySet="Clienti" />
+      <End Role="Prenotazione" EntitySet="Prenotazione" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prenotazi__IdPal__2C3393D0" Association="Self.FK__Prenotazi__IdPal__2C3393D0">
+      <End Role="Palestre" EntitySet="Palestre" />
+      <End Role="Prenotazione" EntitySet="Prenotazione" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
